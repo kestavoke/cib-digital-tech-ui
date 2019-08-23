@@ -37,7 +37,7 @@ public class AddUser_steps {
     @And("^I enter the new user details (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*)$")
     public void iEnterTheNewUserDetails(String firstName, String lastName, String userName, String password, String customer, String role, String email, String cell)
     {
-        addUser.addUserDetails(firstName, lastName, userName, password, customer, role, email, cell);
+        addUser.addUserDetails(firstName, lastName, userName, password, customer, role, email, cell, true);
     }
 
     @When("^I click save option$")

@@ -1,6 +1,6 @@
 # cib-digital-tech-ui
 
-Description: ABSA Corporate and Investment Banking front-end testing
+Description: Corporate and Investment Banking front-end testing
 
 This is a an Hybrid approach with modularity created for "CIB Digital Tech QA automation assessment" the framework consist of other test automation tools such as:
 - Intelli J IDE
@@ -23,3 +23,5 @@ Perquisites to execute the code:
 5. Execute the code with command: mvn clean install
 6. To view the test execution report kindly lookup index.html in the following directory: target/site/reports
 
+
+NOTE: The table does not allow adding a new user including add it manually

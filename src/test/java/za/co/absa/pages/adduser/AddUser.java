@@ -27,50 +27,50 @@ public class AddUser extends PageObject {
     }
 
     @FindBy(xpath = "//button[contains(text(), 'Add User')]")
-    private WebElementFacade addUserButton;
+    WebElementFacade addUserButton;
 
     @FindBy(xpath = "/html/body/div[3]/div[2]")
-    private WebElementFacade addUserForm;
+    WebElementFacade addUserForm;
 
     @FindBy(name = "FirstName")
-    private WebElementFacade firstNameTextField;
+    WebElementFacade firstNameTextField;
 
     @FindBy(name = "LastName")
-    private WebElementFacade lastNameTextField;
+    WebElementFacade lastNameTextField;
 
     @FindBy(name = "UserName")
-    private WebElementFacade userNameTextField;
+    WebElementFacade userNameTextField;
 
     @FindBy(name = "Password")
-    private WebElementFacade passwordTextField;
+    WebElementFacade passwordTextField;
 
     @FindBy(xpath = "/html/body/div[3]/div[2]/form/table/tbody/tr[5]/td[2]/label[1]")
-    private WebElementFacade companyAAARadio;
+    WebElementFacade companyAAARadio;
 
     @FindBy(xpath = "/html/body/div[3]/div[2]/form/table/tbody/tr[5]/td[2]/label[2]")
-    private WebElementFacade companyBBBRadio;
+    WebElementFacade companyBBBRadio;
 
     @FindBy(name = "RoleId")
-    private WebElementFacade roleDropdwmOption;
+    WebElementFacade roleDropdwmOption;
 
     @FindBy(name = "Email")
-    private WebElementFacade emailTextField;
+    WebElementFacade emailTextField;
 
     @FindBy(name = "Mobilephone")
-    private WebElementFacade mobilePhoneTextField;
+    WebElementFacade mobilePhoneTextField;
 
     @FindBy(name = "IsLocked")
-    private WebElementFacade lockedCheckBox;
+    WebElementFacade lockedCheckBox;
 
-    @FindBy(xpath = "//button[contains(text(), 'Save')]")
-    private WebElementFacade saveButton;
+    @FindBy(xpath = "//*[contains(text(), 'Save')]")
+    WebElementFacade saveButton;
 
-    @FindBy(css = "smart-table table table-striped")
-    private WebElementFacade userRecordsTB;
+    @FindBy(xpath = "/html/body/table")
+    WebElementFacade userRecordsTB;
 
     //Element Highlighter
     public void highLighterBorderMethod(WebElementFacade facade) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid green'", facade);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid red'", facade);
     }
 
     //Navigate to the User List Table
@@ -90,6 +90,7 @@ public class AddUser extends PageObject {
     @Step
     public void checkThatUserListTableIsVisible() {
         if (addUserButton.isPresent()) {
+            highLighterBorderMethod(userRecordsTB);
             System.out.println("User List Table is displayed");
         } else {
             Assert.assertTrue("User list table not displayed! ", addUserButton.isPresent());
@@ -99,18 +100,21 @@ public class AddUser extends PageObject {
     //Click add user option
     @Step
     public void clickAddUserButton() {
+        highLighterBorderMethod(addUserButton);
         addUserButton.waitUntilClickable().click();
     }
 
     @Step
     public void checkThatAddUserFormIsVisible() {
         //Switch to add user modal popup form and validate it's displayed
-        Assert.assertTrue("Add User not displayed! ", driver.switchTo().activeElement().isEnabled());
+        WebElement element = driver.switchTo().activeElement();
+
+       Assert.assertTrue("Add User not displayed! ", element.isEnabled());
     }
 
     // Add new user information
     @Step
-    public void addUserDetails(String firstName, String lastName, String userName, String password, String customer, String role, String email, String cell) {
+    public void addUserDetails(String firstName, String lastName, String userName, String password, String customer, String role, String email, String cell, boolean value) {
         firstNameTextField.sendKeys(firstName);
         lastNameTextField.sendKeys(lastName);
         userNameTextField.sendKeys(userName);
@@ -147,8 +151,8 @@ public class AddUser extends PageObject {
         emailTextField.sendKeys(email);
         mobilePhoneTextField.sendKeys(cell);
 
-        //Select the hidden Locked check box opttion
-        lockedCheckBox.click();
+        //Select the hidden Locked check box option
+        if (!value)lockedCheckBox.click();
     }
 
     @Step
@@ -159,6 +163,7 @@ public class AddUser extends PageObject {
         Wait.untilPageLoadComplete(driver);
     }
 
+    //Verify that the   user is added by looping through the table for the username
     @Step
     public void checkThatTheUserIsAdded(String userName){
         WebElementFacade dataTB = userRecordsTB;
@@ -170,11 +175,10 @@ public class AddUser extends PageObject {
 
             for (WebElementFacade eleColumns : lstColumns) {
                 if (eleColumns.getText().equalsIgnoreCase(userName)){
-                    String username = eleColumns.getText();
-                    System.out.println(username);
+                    System.out.println(userName + " User added successfully.");
                 }
                 else {
-                    Assert.assertTrue(userName, eleColumns.isPresent());
+                    Assert.fail(userName + " not added successfully!");
 
                     break;
                 }

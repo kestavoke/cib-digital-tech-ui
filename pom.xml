@@ -129,7 +129,7 @@
                             <!-- The tags to run, maps to CucumberOptions.tags property. Default
                             is no tags. -->
                             <tags>
-                                <tag>@SmokeTest</tag>
+                                <tag>@Smoke</tag>
                             </tags>
                             <!-- Generate TestNG runners instead of JUnit ones. -->
                             <useTestNG>false</useTestNG>
