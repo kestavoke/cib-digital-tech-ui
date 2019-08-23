@@ -24,4 +24,4 @@ Perquisites to execute the code:
 6. To view the test execution report kindly lookup index.html in the following directory: target/site/reports
 
 
-NOTE: The table does not allow adding a new user including add it manually
+NOTE: Kindly know that the user list table does not allow saving a new user record. I even tried to manually insert a new record to verify whether my code has bug but it does not allow manual insert either.
