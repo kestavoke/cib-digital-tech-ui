@@ -18,7 +18,7 @@ To give you a well built launch pad to execute and review the code, the followin
 Perquisites to execute the code:
 1. Java  and Maven should be installed and path configured on the local machine
 2. Intelli J IDE
-3. Clone repo to local machine: git clone https://kestavoke@bitbucket.org/kestavoke/cib-digital-tech-ui.git
+3. Clone repo to local machine: git clone https://github.com/kestavoke/cib-digital-tech-ui.git
 4. Navigate to the cloned dir using CMD prompt
 5. Execute the code with command: mvn clean install
 6. To view the test execution report kindly lookup index.html in the following directory: target/site/reports
